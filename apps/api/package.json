@@ -8,10 +8,13 @@
         "start": "wrangler dev"
     },
     "dependencies": {
-        "hono": "^4.0.0"
+        "@aws-sdk/client-s3": "^3.971.0",
+        "@aws-sdk/s3-request-presigner": "^3.971.0",
+        "hono": "^4.0.0",
+        "@open-mool/db": "workspace:*"
     },
     "devDependencies": {
-        "wrangler": "^3.0.0",
-        "@cloudflare/workers-types": "^4.20240101.0"
+        "@cloudflare/workers-types": "^4.20240101.0",
+        "wrangler": "^3.0.0"
     }
 }
