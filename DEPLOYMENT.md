@@ -86,13 +86,13 @@ If you prefer to keep everything on Cloudflare:
 3. Select your `open-mool` repository
 4. Configure build settings:
    - **Production branch**: `master` (or `main`)
-   - **Framework preset**: `Next.js`
+   - **Framework preset**: `Next.js (Static HTML Export)`
    - **Build command**: `pnpm run build`
-   - **Build output directory**: `.next`
+   - **Build output directory**: `out`
    - **Root directory**: `apps/web`
 5. Click **"Save and Deploy"**
 
 ### Important Notes
-- Cloudflare Pages will automatically detect Next.js and configure the deployment
-- The current setup uses standard Next.js SSR. For advanced Cloudflare-specific features, consider `@cloudflare/next-on-pages`
-- For static export only, add `output: 'export'` to `apps/web/next.config.mjs`
+- The app is configured for static export (`output: 'export'` in `next.config.mjs`)
+- This means no server-side rendering or API routes - purely static HTML/CSS/JS
+- For SSR support on Cloudflare Pages, use `@cloudflare/next-on-pages` instead
