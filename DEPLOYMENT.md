@@ -80,20 +80,19 @@ Click **Deploy**. Vercel will build and host your application.
 
 If you prefer to keep everything on Cloudflare:
 
-### Configuration
-The `apps/web/wrangler.toml` is already configured for Cloudflare Pages deployment.
-
 ### Cloudflare Pages Setup
 1. Go to **Cloudflare Dashboard** > **Pages**
 2. Click **"Create a project"** > **"Connect to Git"**
 3. Select your `open-mool` repository
 4. Configure build settings:
    - **Production branch**: `master` (or `main`)
+   - **Framework preset**: `Next.js`
    - **Build command**: `pnpm run build`
    - **Build output directory**: `.next`
    - **Root directory**: `apps/web`
 5. Click **"Save and Deploy"**
 
 ### Important Notes
-- The current Next.js configuration uses server-side features. For full SSR support on Cloudflare Pages, you'll need `@cloudflare/next-on-pages`.
-- For a simpler static export, update `apps/web/next.config.mjs` to add `output: 'export'`.
+- Cloudflare Pages will automatically detect Next.js and configure the deployment
+- The current setup uses standard Next.js SSR. For advanced Cloudflare-specific features, consider `@cloudflare/next-on-pages`
+- For static export only, add `output: 'export'` to `apps/web/next.config.mjs`
