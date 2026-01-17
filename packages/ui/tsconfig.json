@@ -1,0 +1,16 @@
+{
+    "extends": "@open-mool/config/tsconfig.json",
+    "compilerOptions": {
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "jsx": "react-jsx",
+        "noEmit": true
+    },
+    "include": [
+        "**/*.tsx",
+        "**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
