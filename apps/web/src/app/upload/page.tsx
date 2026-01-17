@@ -5,7 +5,10 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Upload, CheckCircle } from 'lucide-react';
 import { FileUploader } from '@/components/upload/FileUploader';
+import { AudioPreview } from '@/components/upload/AudioPreview';
+import { VideoPreview } from '@/components/upload/VideoPreview';
 import { MetadataForm, Metadata } from '@/components/upload/MetadataForm';
+import { cn } from '@/lib/utils';
 
 // Constants
 // In production, use env var. For dev monorepo, 8787 is standard for Workers.
@@ -142,6 +145,15 @@ export default function UploadPage() {
                                 error={error}
                             />
                         </div>
+
+                        {/* Media Preview */}
+                        {file && status === 'success' && (
+                            file.type.startsWith('audio') ? (
+                                <AudioPreview file={file} />
+                            ) : (
+                                <VideoPreview file={file} />
+                            )
+                        )}
 
                         {/* Visual Guide or Info could go here */}
                         <div className="p-6 bg-blue-50 dark:bg-blue-900/10 rounded-2xl border border-blue-100 dark:border-blue-800/20 text-sm text-blue-800 dark:text-blue-300">
