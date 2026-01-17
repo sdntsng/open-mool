@@ -19,7 +19,25 @@ interface FileUploaderProps {
 }
 
 export function FileUploader({ file, setFile, progress, status, error }: FileUploaderProps) {
-    const onDrop = useCallback((acceptedFiles: File[]) => {
+    const [validationError, setValidationError] = React.useState<string | null>(null);
+
+    const onDrop = useCallback((acceptedFiles: File[], fileRejections: any[]) => {
+        // Clear previous errors
+        setValidationError(null);
+
+        // Handle rejections
+        if (fileRejections.length > 0) {
+            const rejection = fileRejections[0];
+            if (rejection.errors[0]?.code === 'file-too-large') {
+                setValidationError('File size exceeds 500MB limit');
+            } else if (rejection.errors[0]?.code === 'file-invalid-type') {
+                setValidationError('Invalid file type. Please upload MP3, WAV, MP4, or MOV files only');
+            } else {
+                setValidationError('Failed to upload file. Please try again');
+            }
+            return;
+        }
+
         if (acceptedFiles.length > 0) {
             setFile(acceptedFiles[0]);
         }
@@ -31,6 +49,7 @@ export function FileUploader({ file, setFile, progress, status, error }: FileUpl
             'audio/*': ['.mp3', '.wav'],
             'video/*': ['.mp4', '.mov']
         },
+        maxSize: 500 * 1024 * 1024, // 500MB
         maxFiles: 1,
         multiple: false,
         disabled: status === 'uploading' || status === 'success'
@@ -142,6 +161,15 @@ export function FileUploader({ file, setFile, progress, status, error }: FileUpl
                     className="text-sm text-red-500 text-center"
                 >
                     {error}
+                </motion.p>
+            )}
+
+            {validationError && (
+                <motion.p
+                    initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }}
+                    className="text-sm text-red-500 text-center font-medium"
+                >
+                    ⚠️ {validationError}
                 </motion.p>
             )}
         </div>
