@@ -14,32 +14,12 @@ function cn(...inputs: ClassValue[]) {
 export default function HowItWorks() {
     return (
         <main className="min-h-screen bg-bg-canvas selection:bg-primary/20">
-            <Navbar />
-
             <div className="max-w-4xl mx-auto px-6 pt-32 pb-24">
                 <Hero />
                 <ProcessFlow />
                 <ComingSoon />
             </div>
         </main>
-    );
-}
-
-function Navbar() {
-    return (
-        <nav className="fixed top-0 left-0 w-full z-50 px-6 py-6 md:px-12 pointer-events-none">
-            <div className="max-w-7xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md rounded-full p-2 pr-6 border border-gray-200 shadow-sm pointer-events-auto">
-                <Link href="/" className="inline-flex items-center gap-2 text-sm font-human px-4 py-2 hover:bg-gray-100 rounded-full transition-colors text-text-primary">
-                    &larr; Home
-                </Link>
-                <div className="flex items-center gap-4">
-                    <a href="https://github.com/open-mool/open-mool" target="_blank" rel="noopener noreferrer" className="hidden md:inline-flex items-center gap-2 text-xs font-mono text-text-secondary hover:text-primary transition-colors">
-                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        Source
-                    </a>
-                </div>
-            </div>
-        </nav>
     );
 }
 
