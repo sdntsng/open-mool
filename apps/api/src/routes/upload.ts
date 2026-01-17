@@ -170,4 +170,3 @@ upload.delete('/multipart/:uploadId/abort', async (c) => {
 })
 
 export default upload
-    ```
