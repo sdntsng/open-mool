@@ -61,7 +61,14 @@ Before the first deployment, you need to create the Pages project:
    - **Build command**: `pnpm install && pnpm --filter web run build`
    - **Build output directory**: `apps/web/out`
    - **Root directory**: `/` (leave as default)
+   - **Environment variables**: None required (see `apps/web/.env.example` for details)
 6. Click **"Save and Deploy"**
+
+### Environment Variables
+
+Currently, the web application **does not require any environment variables**. It is configured as a static export without API routes or server-side features.
+
+For reference, see the `apps/web/.env.example` file which documents the structure for future integrations if needed.
 
 ## Step 4: Test the Deployment
 
