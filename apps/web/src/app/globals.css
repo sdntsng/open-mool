@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Backgrounds */
+  --bg-canvas: #FFFFFF;
+  --bg-subtle: #F8F9FA;
+  --bg-dark: #121418;
+
+  /* Accents */
+  --accent-primary: #D64933; /* Vermilion */
+  --accent-secondary: #FFB140; /* Marigold */
+  --accent-tech: #005F73; /* Deep Teal */
+
+  /* Typography Colors */
+  --text-primary: #1A1C20;
+  --text-secondary: #6B7280;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+/* The Sutra (Thread) Motif - Vertical layout guide */
+.sutra-line {
+  position: fixed;
+  left: 24px; /* Adjust based on container */
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: var(--accent-primary);
+  opacity: 0.2;
+  z-index: 0;
+  pointer-events: none;
+}
