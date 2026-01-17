@@ -10,48 +10,46 @@
 - [x] Landing page with "Scrollventure" narrative
 - [x] "How It Works" interactive timeline  
 - [x] Dashboard layout with sidebar navigation
+- [x] Dashboard index page with quick action cards
 - [x] Public/private route separation (middleware)
+- [x] Login redirects to Dashboard
 
 ### 1.2 The Gatekeeper (Auth & Identity)
-- [x] Auth0 integration with UserProvider
+- [x] Auth0 v4 SDK integration (middleware pattern)
 - [x] User schema in D1 (`users` table)
 - [x] Role system: `SCOUT`, `GUARDIAN`, `ARCHIVIST`
 - [x] Reputation score tracking
 - [x] Profile page with "Guardian Card" UI
 - [x] Auth0 webhook for user sync
+- [x] Post-login redirect to Dashboard
 
 ### 1.3 The Ingest Engine
 - [x] Upload page (`/upload`) with drag & drop
+- [x] Upload page redesigned with "Himalayan Minimalism" aesthetic
+- [x] Brand fonts (Eczar, Yantramanav, Gotu) and colors applied
 - [x] FileUploader component with progress tracking
 - [x] Metadata form (title, description, language, geolocation)
-- [x] R2 bucket integration
-- [x] D1 `media` table
+- [x] Audio/video preview components
+- [x] R2 bucket integration with CORS configuration
+- [x] D1 `media` table with `user_id` column
 - [x] Presigned URL generation (`POST /upload/presigned`)
 - [x] Metadata storage (`POST /upload/complete`)
+- [x] Multipart upload for large files (>100MB)
+- [x] Pause/resume functionality for uploads
+
+### 1.4 Upload History Dashboard
+- [x] Build `/dashboard/my-uploads` page
+- [x] Display upload cards with status
+- [x] Link from upload success to "My Archives"
 
 ---
 
-## 🚧 In Progress
+## � In Progress
 
-### Upload History Dashboard (Priority 1)
-- [ ] Add `user_id` to media table
-- [ ] Create `GET /api/media/my-uploads` endpoint
-- [ ] Build `/dashboard/my-uploads` page
-- [ ] Display upload cards with status
-
----
-
-## 📋 Backlog (Prioritized)
-
-### Priority 1: Complete Upload Experience
-1. **Upload History** (Current)
-2. **File Validation & Preview**
-   - Client-side type/size validation
-   - Audio/video preview before upload
-   - Thumbnail generation
-3. **Multipart Upload**
-   - Chunked uploads for large files (>100MB)
-   - Pause/resume functionality
+### API User Integration (Priority 1)
+- [ ] Add `user_id` to media records on upload (from Auth0 session)
+- [ ] Create `GET /api/media/my-uploads` endpoint (authenticated)
+- [ ] Filter uploads by authenticated user
 
 ### Priority 2: The Refinery (AI Processing)
 1. **Transcription Worker**
