@@ -4,25 +4,161 @@
 > next build
 
   [1m[38;2;173;127;168m▲ Next.js 14.2.0[39m[22m
+  - Environments: .env.local
 
  [37m[1m [22m[39m Creating an optimized production build ...
  [32m[1m✓[22m[39m Compiled successfully
-[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
-[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting page data  [36m...[39m[2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
-[?25l [37m[1m [22m[39m Generating static pages (0/5)  [36m[    ][39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Generating static pages (0/5)  [36m[=   ][39m[2K[1G[1A[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (5/5)
-[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[?25h
+[36m./src/app/dashboard/layout.tsx[39m
+[33m33[39m:[33m29[39m  [33m[1mWarning[22m[39m: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  [90m[1m@next/next/no-img-element[22m[39m
+[33m65[39m:[33m37[39m  [33m[1mWarning[22m[39m: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  [90m[1m@next/next/no-img-element[22m[39m
+
+[36m./src/app/dashboard/upload/page.tsx[39m
+[33m48[39m:[33m8[39m  [33m[1mWarning[22m[39m: React Hook useEffect has missing dependencies: 'startMultipartUpload' and 'status'. Either include them or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36m./src/components/Profile.tsx[39m
+[33m22[39m:[33m13[39m  [33m[1mWarning[22m[39m: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  [90m[1m@next/next/no-img-element[22m[39m
+
+[36m./src/hooks/useMultipartUpload.ts[39m
+[33m141[39m:[33m8[39m  [33m[1mWarning[22m[39m: React Hook useCallback has a missing dependency: 'initiateUpload'. Either include it or remove the dependency array.  [90m[1mreact-hooks/exhaustive-deps[22m[39m
+
+[36minfo[39m  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting page data  [36m..[39m[2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/10)  [36m[    ][39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Generating static pages (0/10)  [36m[=   ][39mSession error: n [Error]: Dynamic server usage: Route / couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at i (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/page.js:1:6968)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route / couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route / couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at i (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/page.js:1:6968)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route / couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route /dashboard/profile couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at l (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/dashboard/profile/page.js:1:15164)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route /dashboard/profile couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route /dashboard/profile couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at l (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/dashboard/profile/page.js:1:15164)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route /dashboard/profile couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route /dashboard couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at i (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/dashboard/page.js:1:2309)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route /dashboard couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route /dashboard couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at i (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/dashboard/page.js:1:2309)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route /dashboard couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route /dashboard/my-uploads couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/dashboard/my-uploads/page.js:1:2651)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route /dashboard/my-uploads couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+Session error: n [Error]: Dynamic server usage: Route /dashboard/my-uploads couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/78.js:10:42154)
+    at h (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:1:1595)
+    at an.getSession (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/chunks/880.js:12:165163)
+    at c (/Users/sid/Documents/Projects/open-mool/apps/web/.next/server/app/dashboard/my-uploads/page.js:1:2651)
+    at eh (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:134795)
+    at e (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:137680)
+    at ek (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:138154)
+    at Array.toJSON (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:135764)
+    at stringify (<anonymous>)
+    at eR (/Users/sid/Documents/Projects/open-mool/node_modules/.pnpm/next@14.2.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js:12:142228) {
+  description: "Route /dashboard/my-uploads couldn't be rendered statically because it used cookies. See more info here: https://nextjs.org/docs/messages/dynamic-server-error",
+  digest: 'DYNAMIC_SERVER_USAGE'
+}
+[2K[1G[1A[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (10/10)
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G[1A[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
 [2K[1G[1A[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
 
 [4mRoute (app)[24m                              [4mSize[24m     [4mFirst Load JS[24m
-┌ ○ /                                    178 B          [37m[1m93.8 kB[22m[39m
-├ ○ /_not-found                          875 B          [37m[1m87.7 kB[22m[39m
-└ ○ /about                               178 B          [37m[1m93.8 kB[22m[39m
-+ First Load JS shared by all            [37m[1m86.9 kB[22m[39m
-  ├ chunks/71ec73ba-5fd05f4979f8a013.js  53.7 kB
-  ├ chunks/963-ceda70f40338b743.js       31.4 kB
-  └ other shared chunks (total)          1.85 kB
+┌ ƒ /                                    184 B          [37m[1m93.9 kB[22m[39m
+├ ○ /_not-found                          875 B          [37m[1m87.8 kB[22m[39m
+├ ○ /about                               184 B          [37m[1m93.9 kB[22m[39m
+├ ƒ /dashboard                           184 B          [37m[1m93.9 kB[22m[39m
+├ ƒ /dashboard/my-uploads                184 B          [37m[1m93.9 kB[22m[39m
+├ ƒ /dashboard/profile                   5.26 kB        [37m[1m92.2 kB[22m[39m
+├ ○ /dashboard/upload                    45.7 kB         [37m[1m185 kB[22m[39m
+└ ○ /how-it-works                        2.61 kB         [37m[1m135 kB[22m[39m
++ First Load JS shared by all            [37m[1m87 kB[22m[39m
+  ├ chunks/71ec73ba-648905b3c16070e9.js  53.7 kB
+  ├ chunks/963-e7334563cd53ef93.js       31.4 kB
+  └ other shared chunks (total)          1.95 kB
 
 
-○  (Static)  prerendered as static content
+ƒ Middleware                             [37m[1m74 kB[22m[39m
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
 
 [?25h

@@ -19,7 +19,7 @@ export default function About() {
 
                 {/* The Hook Quote */}
                 <p className="font-human text-3xl leading-relaxed text-text-primary mb-16 italic border-l-4 border-primary pl-6 py-2">
-                    "Culture does not die in battles;<br /> it dies in silence."
+                    &quot;Culture does not die in battles;<br /> it dies in silence.&quot;
                 </p>
 
                 <MoolDefinition />
@@ -73,7 +73,7 @@ export default function About() {
                         <strong>Open Mool is the resistance against this silence.</strong>
                     </p>
                     <p className="mb-4">
-                        We are a collective of engineers, historians, and hill-folk building the sovereign digital infrastructure to protect Himalayan heritage. We are building a "Firebreak"—a permanent, indestructible line of defense against the erosion of memory.
+                        We are a collective of engineers, historians, and hill-folk building the sovereign digital infrastructure to protect Himalayan heritage. We are building a &quot;Firebreak&quot;—a permanent, indestructible line of defense against the erosion of memory.
                     </p>
                     <ul className="list-disc pl-6 space-y-2 mb-4">
                         <li><strong>We are not a startup.</strong> We do not sell data; we steward it.</li>

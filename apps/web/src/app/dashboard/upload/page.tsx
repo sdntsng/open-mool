@@ -134,7 +134,7 @@ export default function UploadPage() {
                             Story Preserved
                         </h2>
                         <p className="text-[var(--text-secondary)] font-[family-name:var(--font-gotu)]">
-                            "{metadata.title}" has been safely archived in The Vault.
+                            &quot;{metadata.title}&quot; has been safely archived in The Vault.
                         </p>
                     </div>
                     <div className="flex flex-col gap-4">
