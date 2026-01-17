@@ -1,0 +1,28 @@
+{
+    "rules": [
+        {
+            "allowed": {
+                "origins": [
+                    "http://localhost:3000",
+                    "https://open-mool.pages.dev",
+                    "https://openmool.org"
+                ],
+                "methods": [
+                    "GET",
+                    "PUT",
+                    "POST",
+                    "DELETE",
+                    "HEAD"
+                ],
+                "headers": [
+                    "*"
+                ]
+            },
+            "exposed": [
+                "ETag",
+                "x-amz-checksum-crc32"
+            ],
+            "maxAge": 3600
+        }
+    ]
+}

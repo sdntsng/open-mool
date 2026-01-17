@@ -1,53 +1,128 @@
-# Open Mool Roadmap
+# Open Mool Technical Roadmap
 
-**Mission:** To build the world’s first open-source, AI-ready multimodal archive for the Himalayan region.
+**Mission:** Build the "Source Code of the Himalayas" — a sovereign, AI-ready digital archive.
 
-## Phase 1: The Trident (MVP)
-**Goal:** Robust security, automated processing, and public access.
+---
+
+## ✅ Completed (Phase 1: Foundation)
 
 ### 1.1 The Platform Foundation
-- [ ] **Web App:** Secure, mobile-first web app (Next.js/Cloudflare Pages).
-- [ ] **Auth ("The Gatekeeper"):** Robust login via **Auth0** (Google/Email) with strict identity verification.
-- [ ] **Infrastructure:** Cloudflare D1 (Database) & R2 (Storage).
+- [x] Landing page with "Scrollventure" narrative
+- [x] "How It Works" interactive timeline  
+- [x] Dashboard layout with sidebar navigation
+- [x] Dashboard index page with quick action cards
+- [x] Public/private route separation (middleware)
+- [x] Login redirects to Dashboard
 
-### 1.2 The Submission Node (Input)
-- [ ] **Zero-Friction Uploader:** Audio/Video upload interface.
-- [ ] **Metadata Enforcement:** Mandatory geolocation tags and "Source" details (Elder Name/Village).
-- [ ] **Offline Mode:** Cache uploads to sync later for remote connectivity.
+### 1.2 The Gatekeeper (Auth & Identity)
+- [x] Auth0 v4 SDK integration (middleware pattern)
+- [x] User schema in D1 (`users` table)
+- [x] Role system: `SCOUT`, `GUARDIAN`, `ARCHIVIST`
+- [x] Reputation score tracking
+- [x] Profile page with "Guardian Card" UI
+- [x] Auth0 webhook for user sync
+- [x] Post-login redirect to Dashboard
 
-### 1.3 The AI Refinery (Processing)
-- [ ] **Ingest Pipeline:** Automated cleaning and normalization of audio levels.
-- [ ] **Transcribe & Tag:** Whisper (fine-tuned for Hindi/Indian English) for base scripts.
-- [ ] **Entity Extraction:** LLMs to extract Deities, Places, Rituals.
-- [ ] **Sovereign Storage:** Raw assets in cold storage; optimized versions for the gallery.
+### 1.3 The Ingest Engine
+- [x] Upload page (`/upload`) with drag & drop
+- [x] Upload page redesigned with "Himalayan Minimalism" aesthetic
+- [x] Brand fonts (Eczar, Yantramanav, Gotu) and colors applied
+- [x] FileUploader component with progress tracking
+- [x] Metadata form (title, description, language, geolocation)
+- [x] Audio/video preview components
+- [x] R2 bucket integration with CORS configuration
+- [x] D1 `media` table with `user_id` column
+- [x] Presigned URL generation (`POST /upload/presigned`)
+- [x] Metadata storage (`POST /upload/complete`)
+- [x] Multipart upload for large files (>100MB)
+- [x] Pause/resume functionality for uploads
 
-### 1.4 The Gallery (Output)
-- [ ] **Public Feed:** Spotify-style interface for audio, Instagram-style for visuals.
-- [ ] **Search:** Intelligent retrieval system.
-- [ ] **API Access:** For verified researchers.
+### 1.4 Upload History Dashboard
+- [x] Build `/dashboard/my-uploads` page
+- [x] Display upload cards with status
+- [x] Link from upload success to "My Archives"
 
-## Phase 2: Data Architecture & Trust Layer
-**Goal:** Structured relationships and trusted community.
+---
 
-### 2.1 User Roles ("The Trust Layer")
-- [ ] **Identity:** Auth_ID, Name, Profile_Pic, Affiliation.
-- [ ] **Reputation System:** Karma Points, Levels (Scout, Guardian, Archivist).
-- [ ] **Permissions:** Role-based access control.
+## � In Progress
 
-### 2.2 Taxonomy ("The Knowledge Graph")
-- [ ] **Categories:** Mythology (Dev-Gatha), Oral History (Itihas), Rituals (Reeti-Rivaj), Indigenous Knowledge (Gyaan), Performing Arts (Kala), Language (Boli).
+### API User Integration (Priority 1)
+- [ ] Add `user_id` to media records on upload (from Auth0 session)
+- [ ] Create `GET /api/media/my-uploads` endpoint (authenticated)
+- [ ] Filter uploads by authenticated user
 
-## Phase 3: The Community Engine
-**Goal:** A self-regulating, gamified ecosystem.
+### Priority 2: The Refinery (AI Processing)
+1. **Transcription Worker**
+   - Cloudflare Workers AI or OpenAI Whisper
+   - R2 event trigger on upload
+   - Add `transcript` column to media table
+   - Support Hindi, English, Pahadi dialects
+2. **Auto-Tagging & Enrichment**
+   - Entity extraction (people, places, festivals)
+   - Language detection
+   - Store metadata as JSON
+3. **Processing Status UI**
+   - Real-time progress updates
+   - Display extracted tags
 
-### 3.1 Heritage Certification
-- [ ] **Scout:** 1-10 verified uploads (Badge, Discord access).
-- [ ] **Guardian:** 50+ uploads or 5 creative remixes (Certificate, API access).
-- [ ] **Archivist:** Top 1% contributors (Moderation privileges).
+### Priority 3: The Oracle (Discovery & Search)
+1. **Browse Gallery (`/explore`)**
+   - Grid/list view of all archives
+   - Filters: type, language, region, date
+   - Infinite scroll pagination
+2. **Global Audio/Video Player**
+   - Context-based player (continues while navigating)
+   - Waveform visualization (Wavesurfer.js)
+   - Transcript sync
+3. **Semantic Search**
+   - Cloudflare Vectorize integration
+   - Embed transcripts with `text-embedding-3-small`
+   - Natural language queries
+4. **Map View**
+   - Mapbox GL or deck.gl
+   - Cluster markers by region
 
-### 3.2 Content Loops
-- [ ] **Incentives:** Points for uploads and "Creative Remixes".
+### Priority 4: Community & Gamification
+1. **Reputation System**
+   - Award points for uploads, metadata quality
+   - Milestone badges (10, 50, 100 uploads)
+2. **Guardian Verification**
+   - Review workflow for Guardians
+   - Flag/approve content
+   - Auto-promotion after 5 verified uploads
+3. **Leaderboard**
+   - Weekly/monthly top contributors
 
-## Phase 4: Strategic Value & Expansion
-- [ ] **Pahadi LLM:** Training data curation for regional language models.
-- [ ] **Partnerships:** Institutional alignments.
+### Priority 5: API & Developer Access
+1. **Public API**
+   - Read-only endpoints
+   - API key authentication
+   - OpenAPI docs
+2. **Embeddable Player**
+   - Widget for external sites
+
+---
+
+## Technology Stack
+
+### Core
+- **Frontend:** Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend:** Hono (Cloudflare Workers)
+- **Database:** Cloudflare D1 + Drizzle ORM
+- **Storage:** Cloudflare R2
+- **Auth:** Auth0
+
+### Future Additions
+- **AI:** Cloudflare Workers AI / OpenAI Whisper
+- **Search:** Cloudflare Vectorize
+- **Maps:** Mapbox GL
+- **Audio:** Wavesurfer.js
+- **Video:** Video.js or Plyr
+
+---
+
+## Success Metrics
+- **Upload Success Rate:** >95%
+- **Transcription Accuracy:** >85% (Hindi/English)
+- **Active Users:** 100+ contributors in first 3 months
+- **Archive Size:** 500+ items in 6 months
