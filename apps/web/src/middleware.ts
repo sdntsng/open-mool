@@ -8,9 +8,12 @@ export function middleware(request: NextRequest) {
     response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 
     // Content Security Policy
+    // Note: 'unsafe-inline' for script-src is required for Next.js static export
+    // because Next.js injects inline scripts for hydration and client-side routing.
+    // For SSR deployments, use nonces or hashes instead.
     const csp = [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline'", // Static export only needs unsafe-inline for inline scripts
+        "script-src 'self' 'unsafe-inline'",
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
         "font-src 'self' https://fonts.gstatic.com",
         "img-src 'self' data: https:",
