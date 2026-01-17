@@ -1,5 +1,4 @@
 {
-  "$schema": "https://developers.cloudflare.com/pages/platform/build-configuration",
   "build": {
     "command": "pnpm install && pnpm --filter web run build",
     "cwd": "/",
