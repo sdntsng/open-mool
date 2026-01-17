@@ -56,7 +56,11 @@ git clone https://github.com/open-mool/open-mool.git
 # 2. Install dependencies
 pnpm install
 
-# 3. Start local development
+# 3. Configure environment (optional)
+# No environment variables are required for the web app
+# See apps/web/.env.example for future reference
+
+# 4. Start local development
 pnpm dev
 # Web: http://localhost:3000
 # API: http://localhost:8787
