@@ -1,6 +1,10 @@
 {
   "name": "open-mool-monorepo",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-mool/open-mool.git"
+  },
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

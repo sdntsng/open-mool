@@ -1,0 +1,7 @@
+name = "open-mool-web"
+compatibility_date = "2024-01-01"
+
+pages_build_output_dir = ".next"
+
+[site]
+bucket = ".next"
