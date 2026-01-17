@@ -8,7 +8,9 @@ import { FileUploader } from '@/components/upload/FileUploader';
 import { AudioPreview } from '@/components/upload/AudioPreview';
 import { VideoPreview } from '@/components/upload/VideoPreview';
 import { MetadataForm, Metadata } from '@/components/upload/MetadataForm';
+import { useMultipartUpload } from '@/hooks/useMultipartUpload';
 import { cn } from '@/lib/utils';
+import { Pause, Play } from 'lucide-react';
 
 // Constants
 // In production, use env var. For dev monorepo, 8787 is standard for Workers.
@@ -20,6 +22,9 @@ export default function UploadPage() {
     const [progress, setProgress] = useState(0);
     const [uploadKey, setUploadKey] = useState<string | null>(null);
     const [error, setError] = useState<string>('');
+    const [isLargeFile, setIsLargeFile] = useState(false);
+
+    const multipart = useMultipartUpload();
 
     const [metadata, setMetadata] = useState<Metadata>({
         title: '',
@@ -34,7 +39,15 @@ export default function UploadPage() {
     // Handle File Selection & Auto-Upload
     useEffect(() => {
         if (file && status === 'idle') {
-            startUpload(file);
+            const fileSizeInMB = file.size / (1024 * 1024);
+            const isLarge = fileSizeInMB > 100;
+            setIsLargeFile(isLarge);
+
+            if (isLarge) {
+                startMultipartUpload(file);
+            } else {
+                startUpload(file);
+            }
         }
     }, [file]);
 
@@ -73,6 +86,30 @@ export default function UploadPage() {
             setStatus('error');
         }
     };
+
+    const startMultipartUpload = async (fileToUpload: File) => {
+        setStatus('uploading');
+        setError('');
+
+        try {
+            const key = await multipart.startUpload(fileToUpload);
+            if (key) {
+                setUploadKey(key);
+                setStatus('success');
+            }
+        } catch (err) {
+            console.error(err);
+            setError('Multipart upload failed.');
+            setStatus('error');
+        }
+    };
+
+    // Sync progress from multipart hook
+    useEffect(() => {
+        if (isLargeFile && multipart.isUploading) {
+            setProgress(multipart.progress);
+        }
+    }, [multipart.progress, multipart.isUploading, isLargeFile]);
 
     const handleSubmit = async () => {
         if (!uploadKey || !metadata.title) return;
@@ -189,12 +226,50 @@ export default function UploadPage() {
                                 >
                                     {isSubmitting ? (
                                         <>Saving...</>
-                                    ) : status === 'uploading' ? (
-                                        <>Wait for Upload...</>
-                                    ) : status === 'success' ? (
-                                        <>Submit Entry</>
                                     ) : (
-                                        <>Upload File First</>
+                                        <>
+                                            {status === 'uploading' && (
+                                                <motion.p
+                                                    initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                                                    className="text-xs text-center text-slate-500 font-medium font-mono"
+                                                >
+                                                    {isLargeFile ? `UPLOADING (MULTIPART)... ${Math.round(progress)}%` : `UPLOADING... ${Math.round(progress)}%`}
+                                                </motion.p>
+                                            )}
+
+                                            {isLargeFile && status === 'uploading' && (
+                                                <div className="flex justify-center gap-2 mt-2">
+                                                    {multipart.isUploading ? (
+                                                        <button
+                                                            onClick={() => multipart.pauseUpload()}
+                                                            className="px-4 py-2 bg-yellow-500 text-white rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-yellow-600 transition"
+                                                        >
+                                                            <Pause className="w-4 h-4" /> Pause
+                                                        </button>
+                                                    ) : multipart.isPaused ? (
+                                                        <button
+                                                            onClick={() => file && multipart.resumeUpload(file)}
+                                                            className="px-4 py-2 bg-green-500 text-white rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-green-600 transition"
+                                                        >
+                                                            <Play className="w-4 h-4" /> Resume
+                                                        </button>
+                                                    ) : null}
+                                                    <button
+                                                        onClick={() => multipart.cancelUpload()}
+                                                        className="px-4 py-2 bg-red-500 text-white rounded-lg text-xs font-bold hover:bg-red-600 transition"
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                            )}
+                                            {status === 'uploading' ? (
+                                                <>Wait for Upload...</>
+                                            ) : status === 'success' ? (
+                                                <>Submit Entry</>
+                                            ) : (
+                                                <>Upload File First</>
+                                            )}
+                                        </>
                                     )}
                                 </button>
                             </div>
