@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Eczar, Yantramanav, Gotu } from "next/font/google";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
+import { Header } from "@/components/Header";
 import "./globals.css";
 
 const eczar = Eczar({
@@ -39,10 +41,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={`${eczar.variable} ${yantramanav.variable} ${gotu.variable} font-body antialiased`}>
-                {children}
-            </body>
-        </html>
+        <UserProvider>
+            <html lang="en">
+                <body className={`${eczar.variable} ${yantramanav.variable} ${gotu.variable} font-body antialiased`}>
+                    <Header />
+                    {children}
+                </body>
+            </html>
+        </UserProvider>
     );
 }
