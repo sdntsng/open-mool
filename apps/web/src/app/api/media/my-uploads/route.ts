@@ -20,6 +20,17 @@ export async function GET() {
             },
         });
 
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Backend API error: ${response.status} ${errorText}`);
+            try {
+                const errorData = JSON.parse(errorText);
+                return NextResponse.json(errorData, { status: response.status });
+            } catch {
+                return NextResponse.json({ error: 'Backend API error' }, { status: response.status });
+            }
+        }
+
         const data = await response.json();
         return NextResponse.json(data, { status: response.status });
     } catch (error) {
