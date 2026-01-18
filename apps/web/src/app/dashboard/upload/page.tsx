@@ -21,7 +21,6 @@ export default function UploadPage() {
     const [uploadKey, setUploadKey] = useState<string | null>(null);
     const [error, setError] = useState<string>('');
     const [isLargeFile, setIsLargeFile] = useState(false);
-    const [userSub, setUserSub] = useState<string | null>(null);
 
     const multipart = useMultipartUpload();
 
@@ -34,22 +33,6 @@ export default function UploadPage() {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionComplete, setSubmissionComplete] = useState(false);
-
-    // Fetch user session on mount
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await fetch('/api/user');
-                if (response.ok) {
-                    const data = await response.json();
-                    setUserSub(data.sub);
-                }
-            } catch (error) {
-                console.error('Failed to fetch user:', error);
-            }
-        };
-        fetchUser();
-    }, []);
 
     useEffect(() => {
         if (file && status === 'idle') {
@@ -121,20 +104,10 @@ export default function UploadPage() {
         if (!uploadKey || !metadata.title) return;
         setIsSubmitting(true);
         try {
-            const headers: Record<string, string> = {
-                'Content-Type': 'application/json',
-            };
-            
-            // Add user ID header if available
-            if (userSub) {
-                headers['x-user-id'] = userSub;
-            }
-
-            await axios.post(`${API_URL}/upload/complete`, {
+            // Call proxied API endpoint which handles authentication server-side
+            await axios.post('/api/upload/complete', {
                 key: uploadKey,
                 ...metadata
-            }, {
-                headers
             });
             setSubmissionComplete(true);
         } catch (err) {
