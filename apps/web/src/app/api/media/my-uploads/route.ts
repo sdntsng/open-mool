@@ -4,6 +4,7 @@ import { auth0 } from '@/lib/auth0';
 export const runtime = 'edge';
 
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
+const API_SECRET = process.env.API_SECRET;
 
 export async function GET() {
     try {
@@ -13,11 +14,18 @@ export async function GET() {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        // Forward request to API with authenticated user ID
+        // Forward request to API with authenticated user ID and API secret
+        const headers: Record<string, string> = {
+            'x-user-id': session.user.sub,
+        };
+        
+        // Add API secret for authentication if configured
+        if (API_SECRET) {
+            headers['x-api-secret'] = API_SECRET;
+        }
+
         const response = await fetch(`${API_URL}/api/media/my-uploads`, {
-            headers: {
-                'x-user-id': session.user.sub,
-            },
+            headers,
         });
 
         if (!response.ok) {
@@ -33,7 +41,7 @@ export async function GET() {
 
         const data = await response.json();
         return NextResponse.json(data, { status: response.status });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error('Fetch my uploads error:', error);
         const errorMessage = error instanceof Error ? error.message : 'Unknown error';
         return NextResponse.json(

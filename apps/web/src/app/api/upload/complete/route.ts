@@ -4,6 +4,7 @@ import { auth0 } from '@/lib/auth0';
 export const runtime = 'edge';
 
 const API_URL = process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
+const API_SECRET = process.env.API_SECRET;
 
 export async function POST(request: NextRequest) {
     try {
@@ -15,13 +16,20 @@ export async function POST(request: NextRequest) {
 
         const body = await request.json();
         
-        // Forward request to API with authenticated user ID
+        // Forward request to API with authenticated user ID and API secret
+        const headers: Record<string, string> = {
+            'Content-Type': 'application/json',
+            'x-user-id': session.user.sub,
+        };
+        
+        // Add API secret for authentication if configured
+        if (API_SECRET) {
+            headers['x-api-secret'] = API_SECRET;
+        }
+
         const response = await fetch(`${API_URL}/upload/complete`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-user-id': session.user.sub,
-            },
+            headers,
             body: JSON.stringify(body),
         });
 

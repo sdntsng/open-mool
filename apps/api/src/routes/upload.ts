@@ -8,6 +8,7 @@ type Bindings = {
     R2_ACCOUNT_ID: string
     R2_ACCESS_KEY_ID: string
     R2_SECRET_ACCESS_KEY: string
+    API_SECRET?: string
 }
 
 const upload = new Hono<{ Bindings: Bindings }>()
@@ -62,6 +63,15 @@ upload.post('/complete', async (c) => {
 
     // Extract user ID from custom header
     const userId = c.req.header('x-user-id') || null
+
+    // Validate API secret to ensure request is from trusted Next.js proxy
+    const apiSecret = c.req.header('x-api-secret')
+    const expectedSecret = c.env.API_SECRET
+    
+    if (expectedSecret && apiSecret !== expectedSecret) {
+        console.warn('API secret mismatch or missing for upload/complete')
+        return c.json({ error: 'Unauthorized' }, 401)
+    }
 
     try {
         const { success } = await c.env.DB.prepare(
