@@ -23,6 +23,7 @@ async function fetchMyUploads(userSub: string): Promise<Upload[]> {
         });
 
         if (!response.ok) {
+            console.error(`Failed to fetch uploads: ${response.status} ${response.statusText}`);
             return [];
         }
 
