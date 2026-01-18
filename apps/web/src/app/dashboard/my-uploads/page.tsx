@@ -13,10 +13,13 @@ interface Upload {
     processed: boolean;
 }
 
-async function fetchMyUploads(): Promise<Upload[]> {
+async function fetchMyUploads(userSub: string): Promise<Upload[]> {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787'}/media/my-uploads`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787'}/api/media/my-uploads`, {
             cache: 'no-store',
+            headers: {
+                'x-user-id': userSub,
+            },
         });
 
         if (!response.ok) {
@@ -43,7 +46,7 @@ export default async function MyUploadsPage() {
         redirect('/auth/login');
     }
 
-    const uploads = await fetchMyUploads();
+    const uploads = await fetchMyUploads(session.user.sub);
 
     return (
         <div className="min-h-screen bg-[var(--bg-canvas)] p-8">

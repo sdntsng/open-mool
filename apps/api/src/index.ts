@@ -11,7 +11,7 @@ app.get('/', (c) => {
 })
 
 app.post('/webhooks/auth0', auth0Webhook)
-app.get('/media/my-uploads', getMyUploads)
+app.get('/api/media/my-uploads', getMyUploads)
 
 app.use('/*', cors())
 app.route('/upload', upload)

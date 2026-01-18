@@ -60,9 +60,12 @@ upload.post('/complete', async (c) => {
         return c.json({ error: 'Missing required fields' }, 400)
     }
 
+    // Extract user ID from custom header
+    const userId = c.req.header('x-user-id') || null
+
     try {
         const { success } = await c.env.DB.prepare(
-            `INSERT INTO media (key, title, description, language, location_lat, location_lng, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)`
+            `INSERT INTO media (key, title, description, language, location_lat, location_lng, user_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
         ).bind(
             key,
             title,
@@ -70,6 +73,7 @@ upload.post('/complete', async (c) => {
             language,
             location?.lat || null,
             location?.lng || null,
+            userId,
             new Date().toISOString()
         ).run()
 

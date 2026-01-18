@@ -6,12 +6,16 @@ interface Env {
 
 export const getMyUploads = async (c: Context<{ Bindings: Env }>) => {
     try {
-        // TODO: Add proper auth when implementing user authentication
-        // For now, return all media (will be secured later)
+        // Extract user ID from custom header
+        const userId = c.req.header('x-user-id')
+
+        if (!userId) {
+            return c.json({ error: 'Unauthorized' }, 401)
+        }
 
         const { results } = await c.env.DB.prepare(
-            `SELECT * FROM media ORDER BY created_at DESC LIMIT 50`
-        ).all()
+            `SELECT * FROM media WHERE user_id = ? ORDER BY created_at DESC LIMIT 50`
+        ).bind(userId).all()
 
         return c.json({
             uploads: results,
