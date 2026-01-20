@@ -1,8 +1,20 @@
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { auth0 } from "./lib/auth0";
 
 export async function middleware(request: NextRequest) {
-    return await auth0.middleware(request);
+    try {
+        return await auth0.middleware(request);
+    } catch (error) {
+        // If there's a session decryption error (JWEInvalid), clear the corrupted cookie
+        if (error instanceof Error && error.message.includes('JWE')) {
+            console.error('Session decryption error, clearing cookie:', error.message);
+            const response = NextResponse.redirect(request.url);
+            response.cookies.delete('appSession');
+            return response;
+        }
+        throw error;
+    }
 }
 
 export const config = {
