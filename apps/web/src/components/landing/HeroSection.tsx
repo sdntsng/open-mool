@@ -19,15 +19,15 @@ function RotatingWord() {
     }, []);
 
     return (
-        <span className="inline-block relative w-[4.5em] h-[1.15em] overflow-hidden align-bottom">
+        <span className="inline-flex relative overflow-hidden align-baseline" style={{ minWidth: '2.5em' }}>
             <AnimatePresence mode="wait">
                 <motion.span
                     key={words[index]}
-                    className="absolute inset-0 text-primary"
+                    className="text-primary"
                     initial={{ y: '100%', opacity: 0 }}
                     animate={{ y: '0%', opacity: 1 }}
                     exit={{ y: '-100%', opacity: 0 }}
-                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
                 >
                     {words[index]}
                 </motion.span>
@@ -65,8 +65,7 @@ export function HeroSection() {
                     >
                         Before the last voice fades,
                         <br />
-                        <span className="inline">we capture </span>
-                        <RotatingWord />
+                        we preserve their <RotatingWord />.
                     </motion.h1>
 
                     <motion.p
@@ -75,8 +74,8 @@ export function HeroSection() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.5 }}
                     >
-                        Every elder is a library. We're building the infrastructure
-                        to ensure their knowledge survives - searchable, accessible, and forever open.
+                        With humility, we listen. With care, we record. With technology,
+                        we ensure that the wisdom shared with us endures—forever open, forever honored.
                     </motion.p>
                 </div>
 
