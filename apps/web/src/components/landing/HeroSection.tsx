@@ -109,28 +109,7 @@ export function HeroSection() {
                     </Link>
                 </FadeIn>
 
-                {/* Social Proof / Stats Teaser */}
-                <motion.div
-                    className="flex flex-wrap justify-center gap-8 md:gap-12 pt-8 border-t border-gray-100 mt-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2, duration: 0.8 }}
-                >
-                    {[
-                        { value: '127+', label: 'Elders' },
-                        { value: '48h', label: 'Audio' },
-                        { value: '5', label: 'Dialects' },
-                    ].map((stat) => (
-                        <div key={stat.label} className="text-center">
-                            <div className="font-heading text-2xl md:text-3xl text-primary font-bold">
-                                {stat.value}
-                            </div>
-                            <div className="font-body text-xs uppercase tracking-wider text-text-secondary/60">
-                                {stat.label}
-                            </div>
-                        </div>
-                    ))}
-                </motion.div>
+
             </div>
 
             <ScrollIndicator />

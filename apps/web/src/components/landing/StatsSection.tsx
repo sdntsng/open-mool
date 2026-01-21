@@ -66,18 +66,11 @@ function StatItem({ value, suffix, label, delay = 0 }: StatItemProps) {
 }
 
 export function StatsSection() {
-    const stats = [
-        { value: 127, label: 'Elders Recorded', suffix: '+' },
-        { value: 48, label: 'Hours of Audio', suffix: '' },
-        { value: 12, label: 'Villages Reached', suffix: '' },
-        { value: 5, label: 'Dialects Preserved', suffix: '' },
-    ];
-
     return (
         <section className="py-24 px-8 bg-subtle/50">
             <div className="max-w-5xl mx-auto">
                 <motion.div
-                    className="text-center mb-16"
+                    className="text-center"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -86,26 +79,17 @@ export function StatsSection() {
                     <span className="font-mono text-xs uppercase tracking-widest text-text-secondary mb-4 block">
                         Building The Vault
                     </span>
-                    <h2 className="font-heading text-3xl md:text-4xl text-text-primary">
+                    <h2 className="font-heading text-3xl md:text-4xl text-text-primary mb-6">
                         Every Recording is a Victory
                     </h2>
+                    <p className="font-body text-text-secondary max-w-xl mx-auto">
+                        We&apos;re just getting started. Be among the first Guardians to preserve Himalayan voices for future generations.
+                    </p>
                 </motion.div>
-
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                    {stats.map((stat, index) => (
-                        <StatItem
-                            key={stat.label}
-                            value={stat.value}
-                            suffix={stat.suffix}
-                            label={stat.label}
-                            delay={index * 0.1}
-                        />
-                    ))}
-                </div>
 
                 {/* Decorative divider */}
                 <motion.div
-                    className="mt-16 flex justify-center"
+                    className="mt-12 flex justify-center"
                     initial={{ opacity: 0, scaleX: 0 }}
                     whileInView={{ opacity: 1, scaleX: 1 }}
                     viewport={{ once: true }}
