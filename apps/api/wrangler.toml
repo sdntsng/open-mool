@@ -27,3 +27,11 @@ database_id = "e0142def-0e78-44f9-bceb-d4a9229a6d58"
 [[env.staging.r2_buckets]]
 binding = "STORAGE"
 bucket_name = "open-mool-storage-staging"
+
+[observability]
+enabled = true
+
+[observability.logs]
+enabled = true
+invocation_logs = true
+
