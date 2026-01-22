@@ -16,3 +16,14 @@ bucket_name = "open-mool-storage"
 
 # [ai]
 # binding = "AI"
+
+[env.staging]
+name = "open-mool-api-staging"
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "open-mool-db"
+database_id = "b477d138-8c2c-433a-b71a-92a8520f7081"
+
+[[env.staging.r2_buckets]]
+binding = "STORAGE"
+bucket_name = "open-mool-storage"
