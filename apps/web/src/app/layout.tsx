@@ -3,6 +3,7 @@ import { Eczar, Yantramanav, Gotu } from "next/font/google";
 import { Auth0Provider } from "@auth0/nextjs-auth0/client";
 import { Header } from "@/components/Header";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const eczar = Eczar({
     subsets: ["latin", "devanagari"],
@@ -58,11 +59,13 @@ export default function RootLayout({
     return (
         <html lang="en">
             <Auth0Provider>
-                <body className={`${eczar.variable} ${yantramanav.variable} ${gotu.variable} font-body antialiased`}>
-                    <Header />
-                    {children}
-                </body>
+                <ThemeProvider defaultTheme="system">
+                    <body className={`${eczar.variable} ${yantramanav.variable} ${gotu.variable} font-body antialiased`}>
+                        <Header />
+                        {children}
+                    </body>
+                </ThemeProvider>
             </Auth0Provider>
-        </html>
+        </html >
     );
 }
