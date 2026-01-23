@@ -3,6 +3,7 @@ import {
     VolunteerHero,
     DataFlowVisualization,
     ArchitectureDiagram,
+    AIPipelineSection,
     RoleCards,
     TechStackGrid,
     ContributionCards,
@@ -34,6 +35,9 @@ export default function VolunteersPage() {
 
             {/* Architecture Diagram */}
             <ArchitectureDiagram />
+
+            {/* AI Pipeline - Detailed */}
+            <AIPipelineSection />
 
             {/* Community Roles */}
             <RoleCards />
