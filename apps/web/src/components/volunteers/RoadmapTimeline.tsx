@@ -6,11 +6,11 @@ import { useRef } from 'react';
 const phases = [
     {
         id: 'phase1',
-        phase: 'Phase 1',
-        title: 'Foundation',
+        phase: 'चरण १',
+        title: 'नींव (Foundation)',
         status: 'completed',
         icon: '✅',
-        timeline: 'Q4 2024 - Q1 2025',
+        timeline: 'Dec 2025 - Jan 15, 2026',
         items: [
             'Platform design & branding',
             'Landing page with "Scrollventure"',
@@ -21,11 +21,11 @@ const phases = [
     },
     {
         id: 'phase2',
-        phase: 'Phase 2',
-        title: 'The Refinery',
+        phase: 'चरण २',
+        title: 'शोधनी (The Refinery)',
         status: 'in-progress',
         icon: '🔄',
-        timeline: 'Q1 - Q2 2025',
+        timeline: 'Jan 23 - Feb 10, 2026',
         items: [
             'AI transcription (Whisper)',
             'Auto-tagging & entity extraction',
@@ -36,11 +36,11 @@ const phases = [
     },
     {
         id: 'phase3',
-        phase: 'Phase 3',
-        title: 'Discovery',
+        phase: 'चरण ३',
+        title: 'खोज (Discovery)',
         status: 'upcoming',
         icon: '🔮',
-        timeline: 'Q2 - Q3 2025',
+        timeline: 'Feb 10 - Mar 1, 2026',
         items: [
             'Browse gallery & filters',
             'Semantic search (Vectorize)',
@@ -51,11 +51,11 @@ const phases = [
     },
     {
         id: 'phase4',
-        phase: 'Phase 4',
-        title: 'Community',
+        phase: 'चरण ४',
+        title: 'समुदाय (Community)',
         status: 'upcoming',
         icon: '🌟',
-        timeline: 'Q3 - Q4 2025',
+        timeline: 'Mar 1 - Mar 20, 2026',
         items: [
             'Reputation & karma system',
             'Guardian verification workflow',
@@ -66,11 +66,11 @@ const phases = [
     },
     {
         id: 'phase5',
-        phase: 'Phase 5',
-        title: 'Decentralization',
+        phase: 'चरण ५',
+        title: 'विकेन्द्रीकरण (Decentralization)',
         status: 'future',
         icon: '🌐',
-        timeline: '2026+',
+        timeline: 'Mar 20 - Apr 10, 2026',
         items: [
             '"Mool Nodes" federation',
             'Content Trust licensing',
