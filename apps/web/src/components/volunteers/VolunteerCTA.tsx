@@ -114,6 +114,19 @@ export function VolunteerCTA() {
                     <Link href="/terms" className="hover:text-primary transition-colors">
                         Terms
                     </Link>
+                    <span className="text-gray-300">•</span>
+                    <a href="mailto:team@openmool.org" className="hover:text-primary transition-colors">
+                        Email
+                    </a>
+                    <span className="text-gray-300">•</span>
+                    <a
+                        href="https://chat.whatsapp.com/DizWrcM1Mbr1vTRBvd43B5"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors"
+                    >
+                        WhatsApp
+                    </a>
                 </div>
             </div>
         </section>

@@ -26,7 +26,7 @@ const faqs = [
     },
     {
         question: 'Can I use the archive for research or academic work?',
-        answer: 'Absolutely! The archive is open for non-commercial research and education under the Creative Commons Attribution-NonCommercial (CC BY-NC) license. We ask that you cite the original contributors and Open Mool. For commercial use, please contact us.',
+        answer: 'Absolutely! The archive is open for non-commercial research and education under the Creative Commons Attribution-NonCommercial (CC BY-NC) license. We ask that you cite the original contributors and Open Mool. For commercial use, please contact us at team@openmool.org.',
     },
     {
         question: 'How do I earn Karma points?',
@@ -121,15 +121,28 @@ export function VolunteerFAQ() {
                     viewport={{ once: true }}
                     transition={{ delay: 0.5 }}
                 >
-                    <p className="font-body text-text-secondary">
-                        Still have questions?{' '}
+                    <p className="font-body text-text-secondary flex flex-wrap justify-center gap-x-4 gap-y-2">
+                        <span>Still have questions?</span>
+                        <a href="mailto:team@openmool.org" className="text-primary hover:underline">
+                            team@openmool.org
+                        </a>
+                        <span className="text-gray-300">•</span>
+                        <a
+                            href="https://chat.whatsapp.com/DizWrcM1Mbr1vTRBvd43B5"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary hover:underline"
+                        >
+                            WhatsApp Community
+                        </a>
+                        <span className="text-gray-300">•</span>
                         <a
                             href="https://github.com/open-mool/open-mool/discussions"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline"
                         >
-                            Ask on GitHub Discussions →
+                            GitHub Discussions →
                         </a>
                     </p>
                 </motion.div>
