@@ -129,10 +129,6 @@ export function ArtifactShowcase() {
                                 <p className="font-body font-medium text-lg leading-tight mt-1">
                                     &quot;{item.content}&quot;
                                 </p>
-                                <div className="mt-auto pt-3 flex items-center gap-2 opacity-80">
-                                    <div className="w-5 h-5 rounded-full bg-current opacity-20" />
-                                    <span className="font-human text-sm font-bold">— {item.volunteer}</span>
-                                </div>
                             </div>
                         ))}
                     </motion.div>
