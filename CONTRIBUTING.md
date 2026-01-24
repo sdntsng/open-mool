@@ -4,51 +4,53 @@ Welcome! We are building the **Source Code of the Himalayas**, and we're thrille
 
 ## 🚀 Getting Started
 
-### 1. Prerequisites
-- **Node.js** v20+
-- **pnpm** (Install: `npm install -g pnpm`)
-- **Git**
+### 1-Minute Quick Start (For Frontend / UI Fixes)
 
-### 2. Installation
-Clone the repo and install dependencies:
+If you just want to work on the UI, you don't need any secrets or complex setup.
 
+1.  **Clone & Install:**
+    ```bash
+    git clone https://github.com/open-mool/open-mool.git
+    cd open-mool
+    pnpm install
+    ```
+
+2.  **Enable Dev Mode:**
+    Copy the example environment file and enable Mock Mode.
+    ```bash
+    cp apps/web/.env.example apps/web/.env.local
+    # Ensure NEXT_PUBLIC_MOCK_LOGIN='true' is uncommented in apps/web/.env.local
+    ```
+
+3.  **Run Locally:**
+    ```bash
+    pnpm dev
+    ```
+    *   **Open:** [http://localhost:3000](http://localhost:3000)
+    *   **Login:** Click "Join" to auto-login as a mock user.
+    *   **Database:** If you need the DB, run `cd packages/db && pnpm db:push:local` in a new terminal.
+
+---
+
+### Advanced Setup (For Backend / Full Integration)
+
+If you are working on the API or need real staging data:
+
+#### Local Database (D1) Setup
+The backend uses Cloudflare D1. To set up your local emulator:
 ```bash
-git clone https://github.com/open-mool/open-mool.git
-cd open-mool
-pnpm install
+# Initialize local D1 database schema
+cd packages/db
+pnpm db:push:local
 ```
 
-### 3. Environment Setup
-
-#### Web App (`apps/web`)
-Create `.env.local` in `apps/web`:
+#### Running Against Staging
+To connect your local app to the **Remote Staging Infrastructure** (Requires access rights):
 ```bash
-# Ask the team for these values or set up your own Auth0 tenant
-NEXT_PUBLIC_API_URL=http://localhost:8787
-AUTH0_SECRET='...'
-AUTH0_BASE_URL='http://localhost:3000'
-AUTH0_ISSUER_BASE_URL='...'
-AUTH0_CLIENT_ID='...'
-AUTH0_CLIENT_SECRET='...'
+pnpm dev:remote
 ```
-
-#### API (`apps/api`)
-Create `.dev.vars` in `apps/api`:
-```bash
-# Cloudflare R2 & D1 credentials
-R2_ACCOUNT_ID=...
-R2_ACCESS_KEY_ID=...
-R2_SECRET_ACCESS_KEY=...
-```
-
-### 4. Running Locally
-Start both the Frontend and Backend in development mode:
-
-```bash
-pnpm dev
-```
-- Web: [http://localhost:3000](http://localhost:3000)
-- API: [http://localhost:8787](http://localhost:8787)
+*   This skips the local emulator and connects directly to Cloudflare Staging.
+*   You will be asked to authenticate via `wrangler login` if not already logged in.
 
 ---
 
