@@ -85,8 +85,13 @@ export default function UploadPage() {
         if (file && status === 'idle') {
             const fileSizeInMB = file.size / (1024 * 1024);
             const isLarge = fileSizeInMB > 100;
+            const isLocalDev = process.env.NEXT_PUBLIC_MOCK_LOGIN === 'true';
+
             setIsLargeFile(isLarge);
-            if (isLarge) {
+
+            // In local dev (mock login), always use multipart because it proxies through the worker.
+            // Direct S3 uploads (presigned urls) won't work locally without real credentials.
+            if (isLarge || isLocalDev) {
                 startMultipartUpload(file);
             } else {
                 startUpload(file);

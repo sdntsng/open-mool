@@ -110,7 +110,14 @@ upload.post('/multipart/create', async (c) => {
 // Multipart Upload: Upload Part
 upload.put('/multipart/:uploadId/part', async (c) => {
     const { uploadId } = c.req.param()
-    const { partNumber, key } = await c.req.json()
+    const partNumber = parseInt(c.req.query('partNumber') || '0', 10)
+    const key = c.req.query('key')
+
+    // Check if metadata is valid
+    if (!partNumber || !key) {
+        return c.json({ error: 'Missing partNumber or key in query params' }, 400)
+    }
+
     const body = await c.req.arrayBuffer()
 
     if (!body || body.byteLength === 0) {
