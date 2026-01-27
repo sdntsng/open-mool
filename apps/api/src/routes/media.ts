@@ -1,8 +1,11 @@
 import { Context } from 'hono'
+import { getGeminiEmbedding } from '../lib/embeddings'
 
 interface Env {
     DB: D1Database
+    VECTOR_INDEX: VectorizeIndex
     API_SECRET?: string
+    GEMINI_API_KEY?: string
 }
 
 export const getMyUploads = async (c: Context<{ Bindings: Env }>) => {
@@ -61,6 +64,57 @@ export const getMediaCount = async (c: Context<{ Bindings: Env }>) => {
         return c.json({ count: result.count })
     } catch (error) {
         console.error('Failed to fetch media count:', error)
+        return c.json({ error: 'Internal Server Error' }, 500)
+    }
+}
+
+export const searchMedia = async (c: Context<{ Bindings: Env }>) => {
+    try {
+        const query = c.req.query('q')
+        if (!query) {
+            return c.json({ error: 'Query parameter "q" is required' }, 400)
+        }
+
+        const geminiApiKey = c.env.GEMINI_API_KEY
+        if (!geminiApiKey) {
+            return c.json({ error: 'Search is currently unavailable' }, 503)
+        }
+
+        // Generate embedding for the query
+        const embedding = await getGeminiEmbedding(query, geminiApiKey)
+
+        // Search vector index
+        const vectorResults = await c.env.VECTOR_INDEX.query(embedding, {
+            topK: 10,
+            returnValues: false,
+            returnMetadata: true
+        })
+
+        if (vectorResults.matches.length === 0) {
+            return c.json({ results: [] })
+        }
+
+        // Fetch full metadata from D1
+        const ids = vectorResults.matches.map(m => parseInt(m.id))
+        const placeholders = ids.map(() => '?').join(',')
+        
+        const { results } = await c.env.DB.prepare(
+            `SELECT * FROM media WHERE id IN (${placeholders})`
+        ).bind(...ids).all()
+
+        // Sort results by similarity score from vector search
+        const sortedResults = results.sort((a: any, b: any) => {
+            const scoreA = vectorResults.matches.find(m => parseInt(m.id) === a.id)?.score || 0
+            const scoreB = vectorResults.matches.find(m => parseInt(m.id) === b.id)?.score || 0
+            return scoreB - scoreA
+        })
+
+        return c.json({
+            results: sortedResults,
+            count: sortedResults.length
+        })
+    } catch (error) {
+        console.error('Search failed:', error)
         return c.json({ error: 'Internal Server Error' }, 500)
     }
 }

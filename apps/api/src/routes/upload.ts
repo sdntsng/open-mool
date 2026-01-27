@@ -1,15 +1,19 @@
 import { Hono } from 'hono'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { getGeminiEmbedding } from '../lib/embeddings'
 
 type Bindings = {
     DB: D1Database
     STORAGE: R2Bucket
+    VECTOR_INDEX: VectorizeIndex
+    AI: any
     R2_ACCOUNT_ID: string
     R2_ACCESS_KEY_ID: string
     R2_SECRET_ACCESS_KEY: string
     R2_BUCKET_NAME: string
     API_SECRET?: string
+    GEMINI_API_KEY?: string
 }
 
 const upload = new Hono<{ Bindings: Bindings }>()
@@ -79,8 +83,10 @@ upload.post('/complete', async (c) => {
     }
 
     try {
-        const { success } = await c.env.DB.prepare(
-            `INSERT INTO media (key, title, description, language, location_lat, location_lng, user_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
+        const mediaRecord = await c.env.DB.prepare(
+            `INSERT INTO media (key, title, description, language, location_lat, location_lng, user_id, created_at) 
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+             RETURNING id`
         ).bind(
             key,
             title,
@@ -90,13 +96,39 @@ upload.post('/complete', async (c) => {
             location?.lng || null,
             userId,
             new Date().toISOString()
-        ).run()
+        ).first<{ id: number }>()
 
-        if (!success) {
+        if (!mediaRecord) {
             return c.json({ error: 'Failed to save metadata' }, 500)
         }
 
-        return c.json({ success: true })
+        // Generate and save embedding
+        const geminiApiKey = c.env.GEMINI_API_KEY
+        if (geminiApiKey) {
+            try {
+                const textToEmbed = `${title} ${description || ''}`.trim()
+                const embedding = await getGeminiEmbedding(textToEmbed, geminiApiKey)
+                
+                await c.env.VECTOR_INDEX.upsert([
+                    {
+                        id: mediaRecord.id.toString(),
+                        values: embedding,
+                        metadata: { title, userId }
+                    }
+                ])
+                
+                // Mark as processed in DB
+                await c.env.DB.prepare(
+                    `UPDATE media SET processed = 1 WHERE id = ?`
+                ).bind(mediaRecord.id).run()
+            } catch (embedError) {
+                console.error('Failed to generate/save embedding:', embedError)
+                // We don't fail the whole request if embedding fails, 
+                // but maybe we should have a background job to retry.
+            }
+        }
+
+        return c.json({ success: true, id: mediaRecord.id })
     } catch (e) {
         console.error(e)
         return c.json({ error: 'Database error' }, 500)

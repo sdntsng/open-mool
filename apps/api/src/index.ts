@@ -2,11 +2,13 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { auth0Webhook } from './webhooks/auth0'
 import upload from './routes/upload'
-import { getMyUploads, getMediaCount } from './routes/media'
+import { getMyUploads, getMediaCount, searchMedia } from './routes/media'
 
 type Bindings = {
   R2_BUCKET_NAME: string
   DB: D1Database
+  VECTOR_INDEX: VectorizeIndex
+  GEMINI_API_KEY?: string
 }
 
 const app = new Hono<{ Bindings: Bindings }>()
@@ -24,6 +26,7 @@ app.get('/', (c) => {
 app.post('/webhooks/auth0', auth0Webhook)
 app.get('/api/media/my-uploads', getMyUploads)
 app.get('/api/media/count', getMediaCount)
+app.get('/api/media/search', searchMedia)
 
 app.use('/*', cors())
 app.route('/upload', upload)

@@ -16,8 +16,14 @@ database_id = "b477d138-8c2c-433a-b71a-92a8520f7081"
 binding = "STORAGE"
 bucket_name = "open-mool-storage"
 
-# [ai]
-# binding = "AI"
+[ai]
+binding = "AI"
+
+[[vectorize]]
+binding = "VECTOR_INDEX"
+index_name = "open-mool-vectors"
+# For text-embedding-004, use 768 dimensions
+# For OpenAI text-embedding-3-small, use 1536 dimensions
 
 [env.staging]
 name = "open-mool-api-staging"
