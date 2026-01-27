@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUser } from '@auth0/nextjs-auth0/client';
-
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Logo } from "@/components/Logo";
 
 export function Header() {
@@ -24,6 +24,7 @@ export function Header() {
                 <nav className="flex items-center gap-6">
                     {/* Navigation Links - Hidden on mobile, visible on desktop */}
                     <div className="hidden md:flex items-center gap-6 font-[family-name:var(--font-yantramanav)] uppercase text-xs tracking-[0.2em] font-bold text-[var(--text-secondary)]">
+                        <ThemeToggle />
                         <Link href="/about" className="hover:text-[var(--text-primary)] transition-colors">About</Link>
                         <Link href="/how-it-works" className="hover:text-[var(--text-primary)] transition-colors">How it Works</Link>
                     </div>
