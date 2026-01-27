@@ -66,6 +66,6 @@ export default function RootLayout({
                     </ThemeProvider>
                 </body>
             </Auth0Provider>
-        </html >
+        </html>
     );
 }
