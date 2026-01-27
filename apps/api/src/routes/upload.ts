@@ -102,18 +102,56 @@ upload.post('/complete', async (c) => {
             return c.json({ error: 'Failed to save metadata' }, 500)
         }
 
-        // Generate and save embedding
+        // --- THE REFINERY: AI Processing Pipeline ---
+        
+        let transcription = '';
+        
+        // 1. Transcription with Whisper
+        try {
+            const object = await c.env.STORAGE.get(key);
+            if (object) {
+                // Check if it's likely an audio/video file based on extension or metadata
+                const isMedia = key.match(/\.(mp3|wav|ogg|m4a|mp4|webm|mov|avi|flv)$/i);
+                
+                if (isMedia) {
+                    const blob = await object.arrayBuffer();
+                    
+                    // Limit file size for transcription (Workers AI has limits, typically 25MB)
+                    if (blob.byteLength < 25 * 1024 * 1024) {
+                        const aiResponse = await c.env.AI.run('@cf/openai/whisper', {
+                            audio: [...new Uint8Array(blob)]
+                        });
+                        
+                        if (aiResponse && aiResponse.text) {
+                            transcription = aiResponse.text;
+                            
+                            // Save transcription to DB
+                            await c.env.DB.prepare(
+                                `UPDATE media SET transcription = ? WHERE id = ?`
+                            ).bind(transcription, mediaRecord.id).run();
+                        }
+                    } else {
+                        console.warn(`File ${key} too large for transcription (${blob.byteLength} bytes)`);
+                    }
+                }
+            }
+        } catch (whisperError) {
+            console.error('Whisper transcription failed:', whisperError);
+        }
+
+        // 2. Generate and save embedding
         const geminiApiKey = c.env.GEMINI_API_KEY
         if (geminiApiKey) {
             try {
-                const textToEmbed = `${title} ${description || ''}`.trim()
+                // Include transcription in the embedding for better search
+                const textToEmbed = `${title} ${description || ''} ${transcription}`.trim()
                 const embedding = await getGeminiEmbedding(textToEmbed, geminiApiKey)
                 
                 await c.env.VECTOR_INDEX.upsert([
                     {
                         id: mediaRecord.id.toString(),
                         values: embedding,
-                        metadata: { title, userId }
+                        metadata: { title, userId, transcription: transcription.substring(0, 100) }
                     }
                 ])
                 
@@ -123,12 +161,10 @@ upload.post('/complete', async (c) => {
                 ).bind(mediaRecord.id).run()
             } catch (embedError) {
                 console.error('Failed to generate/save embedding:', embedError)
-                // We don't fail the whole request if embedding fails, 
-                // but maybe we should have a background job to retry.
             }
         }
 
-        return c.json({ success: true, id: mediaRecord.id })
+        return c.json({ success: true, id: mediaRecord.id, transcription: transcription || undefined })
     } catch (e) {
         console.error(e)
         return c.json({ error: 'Database error' }, 500)

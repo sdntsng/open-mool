@@ -4,6 +4,7 @@ import { getGeminiEmbedding } from '../lib/embeddings'
 interface Env {
     DB: D1Database
     VECTOR_INDEX: VectorizeIndex
+    AI: any
     API_SECRET?: string
     GEMINI_API_KEY?: string
 }
@@ -28,7 +29,7 @@ export const getMyUploads = async (c: Context<{ Bindings: Env }>) => {
 
         // Select only necessary columns for performance
         const { results } = await c.env.DB.prepare(
-            `SELECT id, key, title, description, language, location_lat, location_lng, created_at, processed, user_id
+            `SELECT id, key, title, description, language, location_lat, location_lng, created_at, processed, user_id, transcription
              FROM media
              WHERE user_id = ?
              ORDER BY created_at DESC

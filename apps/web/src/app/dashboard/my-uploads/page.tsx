@@ -11,6 +11,7 @@ interface Upload {
     language: string | null;
     created_at: string;
     processed: boolean;
+    transcription: string | null;
 }
 
 async function fetchMyUploads(userSub: string): Promise<Upload[] | null> {
@@ -151,6 +152,17 @@ export default async function MyUploadsPage() {
                                 <p className="text-sm text-[var(--text-secondary)] mb-4 line-clamp-3">
                                     {upload.description}
                                 </p>
+                            )}
+
+                            {upload.transcription && (
+                                <div className="mb-4">
+                                    <span className="text-[10px] uppercase tracking-widest text-[var(--accent-primary)] font-bold block mb-1">
+                                        Transcription Snippet
+                                    </span>
+                                    <p className="text-xs italic text-[var(--text-secondary)] line-clamp-2">
+                                        "{upload.transcription}"
+                                    </p>
+                                </div>
                             )}
 
                             <div className="flex items-center justify-between text-xs text-[var(--text-secondary)]">

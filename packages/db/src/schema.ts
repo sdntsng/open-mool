@@ -24,4 +24,5 @@ export const media = sqliteTable("media", {
     createdAt: text("created_at").notNull(),
     processed: integer("processed", { mode: "boolean" }).default(false),
     userId: text("user_id"),
+    transcription: text("transcription"),
 });

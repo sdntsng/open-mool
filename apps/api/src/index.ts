@@ -8,6 +8,7 @@ type Bindings = {
   R2_BUCKET_NAME: string
   DB: D1Database
   VECTOR_INDEX: VectorizeIndex
+  AI: any
   GEMINI_API_KEY?: string
 }
 
