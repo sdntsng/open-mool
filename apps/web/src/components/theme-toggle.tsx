@@ -3,12 +3,11 @@
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import { useEffect } from "react"
 
 export function ThemeToggle() {
     const { theme, setTheme } = useTheme()
 
-    useEffect(() => {
+    React.useEffect(() => {
         const storedTheme = localStorage.getItem("theme")
         if (storedTheme) {
             setTheme(storedTheme)
