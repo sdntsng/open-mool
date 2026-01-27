@@ -2,16 +2,28 @@ import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { auth0Webhook } from './webhooks/auth0'
 import upload from './routes/upload'
-import { getMyUploads } from './routes/media'
+import { getMyUploads, getMediaCount } from './routes/media'
 
-const app = new Hono()
+type Bindings = {
+  R2_BUCKET_NAME: string
+  DB: D1Database
+}
+
+const app = new Hono<{ Bindings: Bindings }>()
 
 app.get('/', (c) => {
-  return c.json({ message: 'Open Mool API is running', status: 'healthy' })
+  const isStaging = c.env.R2_BUCKET_NAME?.includes('staging');
+  return c.json({
+    message: 'Open Mool API is running',
+    status: 'healthy',
+    mode: isStaging ? 'remote (staging)' : 'local (emulated)',
+    bucket: c.env.R2_BUCKET_NAME
+  })
 })
 
 app.post('/webhooks/auth0', auth0Webhook)
 app.get('/api/media/my-uploads', getMyUploads)
+app.get('/api/media/count', getMediaCount)
 
 app.use('/*', cors())
 app.route('/upload', upload)
