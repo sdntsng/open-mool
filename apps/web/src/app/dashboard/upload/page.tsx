@@ -34,27 +34,15 @@ export default function UploadPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submissionComplete, setSubmissionComplete] = useState(false);
 
-    useEffect(() => {
-        if (file && status === 'idle') {
-            const fileSizeInMB = file.size / (1024 * 1024);
-            const isLarge = fileSizeInMB > 100;
-            setIsLargeFile(isLarge);
-            if (isLarge) {
-                startMultipartUpload(file);
-            } else {
-                startUpload(file);
-            }
-        }
-    }, [file]);
-
-    const startUpload = async (fileToUpload: File) => {
+    const startUpload = React.useCallback(async (fileToUpload: File) => {
         setStatus('uploading');
         setProgress(0);
         setError('');
         setUploadKey(null);
 
         try {
-            const { data: presigned } = await axios.post(`${API_URL}/upload/presigned`, {
+            // Use local proxy to ensure authentication
+            const { data: presigned } = await axios.post('/api/upload/presigned', {
                 filename: fileToUpload.name,
                 contentType: fileToUpload.type
             });
@@ -76,9 +64,9 @@ export default function UploadPage() {
             setError('Upload failed. Please try again.');
             setStatus('error');
         }
-    };
+    }, []);
 
-    const startMultipartUpload = async (fileToUpload: File) => {
+    const startMultipartUpload = React.useCallback(async (fileToUpload: File) => {
         setStatus('uploading');
         setError('');
         try {
@@ -92,7 +80,25 @@ export default function UploadPage() {
             setError('Multipart upload failed.');
             setStatus('error');
         }
-    };
+    }, [multipart.startUpload]);
+
+    useEffect(() => {
+        if (file && status === 'idle') {
+            const fileSizeInMB = file.size / (1024 * 1024);
+            const isLarge = fileSizeInMB > 100;
+            const isLocalDev = process.env.NEXT_PUBLIC_MOCK_LOGIN === 'true';
+
+            setIsLargeFile(isLarge);
+
+            // In local dev (mock login), always use multipart because it proxies through the worker.
+            // Direct S3 uploads (presigned urls) won't work locally without real credentials.
+            if (isLarge || isLocalDev) {
+                startMultipartUpload(file);
+            } else {
+                startUpload(file);
+            }
+        }
+    }, [file, status, startUpload, startMultipartUpload]);
 
     useEffect(() => {
         if (isLargeFile && multipart.isUploading) {
@@ -104,7 +110,7 @@ export default function UploadPage() {
         if (!uploadKey || !metadata.title) return;
         setIsSubmitting(true);
         try {
-            // Call proxied API endpoint which handles authentication server-side
+            // Use local proxy to inject user ID and API secret
             await axios.post('/api/upload/complete', {
                 key: uploadKey,
                 ...metadata

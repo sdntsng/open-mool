@@ -8,6 +8,7 @@ type Bindings = {
     R2_ACCOUNT_ID: string
     R2_ACCESS_KEY_ID: string
     R2_SECRET_ACCESS_KEY: string
+    R2_BUCKET_NAME: string
     API_SECRET?: string
 }
 
@@ -42,7 +43,7 @@ upload.post('/presigned', async (c) => {
     const key = `${crypto.randomUUID()}-${filename}`
 
     const command = new PutObjectCommand({
-        Bucket: 'open-mool-storage',
+        Bucket: c.env.R2_BUCKET_NAME,
         Key: key,
         ContentType: contentType,
     })
@@ -62,7 +63,7 @@ upload.post('/complete', async (c) => {
     }
 
     // Extract user ID from custom header
-    const userId = c.req.header('x-user-id') || null
+    const userId = c.req.header('x-user-id')
 
     // Validate API secret to ensure request is from trusted Next.js proxy
     const apiSecret = c.req.header('x-api-secret')
@@ -71,6 +72,10 @@ upload.post('/complete', async (c) => {
     if (expectedSecret && apiSecret !== expectedSecret) {
         console.warn('API secret mismatch or missing for upload/complete')
         return c.json({ error: 'Unauthorized' }, 401)
+    }
+
+    if (!userId) {
+        return c.json({ error: 'User ID required' }, 400)
     }
 
     try {
@@ -123,7 +128,14 @@ upload.post('/multipart/create', async (c) => {
 // Multipart Upload: Upload Part
 upload.put('/multipart/:uploadId/part', async (c) => {
     const { uploadId } = c.req.param()
-    const { partNumber, key } = await c.req.json()
+    const partNumber = parseInt(c.req.query('partNumber') || '0', 10)
+    const key = c.req.query('key')
+
+    // Check if metadata is valid
+    if (!partNumber || !key) {
+        return c.json({ error: 'Missing partNumber or key in query params' }, 400)
+    }
+
     const body = await c.req.arrayBuffer()
 
     if (!body || body.byteLength === 0) {

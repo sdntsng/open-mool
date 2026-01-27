@@ -10,10 +10,9 @@ export const POST = async (req: Request) => {
 
     const body = await req.json();
     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8787';
-    // Ensure API_SECRET is set in your .env.local
     const apiSecret = process.env.API_SECRET;
 
-    const response = await fetch(`${apiUrl}/upload/complete`, {
+    const response = await fetch(`${apiUrl}/upload/presigned`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
