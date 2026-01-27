@@ -9,6 +9,7 @@ type Bindings = {
     R2_ACCESS_KEY_ID: string
     R2_SECRET_ACCESS_KEY: string
     R2_BUCKET_NAME: string
+    API_SECRET?: string
 }
 
 const upload = new Hono<{ Bindings: Bindings }>()
@@ -61,9 +62,25 @@ upload.post('/complete', async (c) => {
         return c.json({ error: 'Missing required fields' }, 400)
     }
 
+    // Extract user ID from custom header
+    const userId = c.req.header('x-user-id')
+
+    // Validate API secret to ensure request is from trusted Next.js proxy
+    const apiSecret = c.req.header('x-api-secret')
+    const expectedSecret = c.env.API_SECRET
+    
+    if (expectedSecret && apiSecret !== expectedSecret) {
+        console.warn('API secret mismatch or missing for upload/complete')
+        return c.json({ error: 'Unauthorized' }, 401)
+    }
+
+    if (!userId) {
+        return c.json({ error: 'User ID required' }, 400)
+    }
+
     try {
         const { success } = await c.env.DB.prepare(
-            `INSERT INTO media (key, title, description, language, location_lat, location_lng, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)`
+            `INSERT INTO media (key, title, description, language, location_lat, location_lng, user_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`
         ).bind(
             key,
             title,
@@ -71,6 +88,7 @@ upload.post('/complete', async (c) => {
             language,
             location?.lat || null,
             location?.lng || null,
+            userId,
             new Date().toISOString()
         ).run()
 

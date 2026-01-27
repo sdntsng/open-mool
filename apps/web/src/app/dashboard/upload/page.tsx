@@ -62,7 +62,8 @@ export default function UploadPage() {
         setUploadKey(null);
 
         try {
-            const { data: presigned } = await axios.post(`${API_URL}/upload/presigned`, {
+            // Use local proxy to ensure authentication
+            const { data: presigned } = await axios.post('/api/upload/presigned', {
                 filename: fileToUpload.name,
                 contentType: fileToUpload.type
             });
@@ -106,11 +107,14 @@ export default function UploadPage() {
 
     useEffect(() => {
         if (file && status === 'idle') {
-            const isLarge = file.size / (1024 * 1024) > 100;
+            const fileSizeInMB = file.size / (1024 * 1024);
+            const isLarge = fileSizeInMB > 100;
             const isLocalDev = process.env.NEXT_PUBLIC_MOCK_LOGIN === 'true';
 
             setIsLargeFile(isLarge);
 
+            // In local dev (mock login), always use multipart because it proxies through the worker.
+            // Direct S3 uploads (presigned urls) won't work locally without real credentials.
             if (isLarge || isLocalDev) {
                 startMultipartUpload(file);
             } else {
@@ -126,25 +130,25 @@ export default function UploadPage() {
     }, [multipart.progress, multipart.isUploading, isLargeFile]);
 
     const handleSubmit = async () => {
-    if (!uploadKey || !metadata.title) return;
+        if (!uploadKey || !metadata.title) return;
 
-    setIsSubmitting(true);
-    setError(''); // clear previous errors
+        setIsSubmitting(true);
+        setError(''); // clear previous errors
 
-    try {
-        await axios.post(`${API_URL}/upload/complete`, {
-            key: uploadKey,
-            ...metadata
-        });
-
-        setSubmissionComplete(true);
-    } catch (err) {
-        console.error('Failed to save metadata:', err);
-        setError('Failed to save metadata. Please try again.');
-    } finally {
-        setIsSubmitting(false);
-    }
-};
+        try {
+            // Use local proxy to inject user ID and API secret
+            await axios.post('/api/upload/complete', {
+                key: uploadKey,
+                ...metadata
+            });
+            setSubmissionComplete(true);
+        } catch (err) {
+            console.error('Failed to save metadata:', err);
+            setError('Failed to save metadata. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     /* ---------- Success State ---------- */
     if (submissionComplete) {
