@@ -48,10 +48,19 @@ export const getMyUploads = async (c: Context<{ Bindings: Env }>) => {
 
 export const getMediaCount = async (c: Context<{ Bindings: Env }>) => {
     try {
-        const userId = c.req.query('userId')
+        const userId = c.req.header('x-user-id')
 
         if (!userId) {
-            return c.json({ error: 'userId is required' }, 400)
+            return c.json({ error: 'x-user-id header is required' }, 400)
+        }
+
+        // Validate API secret to ensure request is from trusted Next.js proxy/server
+        const apiSecret = c.req.header('x-api-secret')
+        const expectedSecret = c.env.API_SECRET
+        
+        if (expectedSecret && apiSecret !== expectedSecret) {
+            console.warn('API secret mismatch or missing for media count')
+            return c.json({ error: 'Unauthorized' }, 401)
         }
 
         const result = await c.env.DB.prepare(
