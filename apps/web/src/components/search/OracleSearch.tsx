@@ -237,7 +237,7 @@ export const OracleSearch: React.FC<OracleSearchProps> = ({ apiUrl }) => {
                                                     <Sparkles className="w-2.5 h-2.5" /> Transcription
                                                 </span>
                                                 <p className="text-xs italic text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
-                                                    "{item.transcription}"
+                                                    &quot;{item.transcription}&quot;
                                                 </p>
                                             </div>
                                         )}

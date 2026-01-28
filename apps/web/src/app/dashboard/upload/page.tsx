@@ -103,7 +103,7 @@ export default function UploadPage() {
             setError('Multipart upload failed.');
             setStatus('error');
         }
-    }, [multipart.startUpload]);
+    }, [multipart]);
 
     useEffect(() => {
         if (file && status === 'idle') {

@@ -163,7 +163,7 @@ export default async function MyUploadsPage() {
                                         Transcription Snippet
                                     </span>
                                     <p className="text-xs italic text-[var(--text-secondary)] line-clamp-2">
-                                        "{upload.transcription}"
+                                        &quot;{upload.transcription}&quot;
                                     </p>
                                 </div>
                             )}
