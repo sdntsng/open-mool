@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
+import { authMiddleware, getAuthUserId } from '../middleware/auth'
 import { processMedia } from '../lib/refinery'
 
 type Bindings = {
@@ -11,12 +12,16 @@ type Bindings = {
     R2_ACCOUNT_ID: string
     R2_ACCESS_KEY_ID: string
     R2_SECRET_ACCESS_KEY: string
+    AUTH0_DOMAIN: string
+    AUTH0_AUDIENCE: string
     R2_BUCKET_NAME: string
     API_SECRET?: string
     GEMINI_API_KEY?: string
 }
 
 const upload = new Hono<{ Bindings: Bindings }>()
+
+upload.use('/complete', authMiddleware())
 
 // Generate Presigned URL
 upload.post('/presigned', async (c) => {
@@ -66,20 +71,9 @@ upload.post('/complete', async (c) => {
         return c.json({ error: 'Missing required fields' }, 400)
     }
 
-    // Extract user ID from custom header
-    const userId = c.req.header('x-user-id')
-
-    // Validate API secret to ensure request is from trusted Next.js proxy
-    const apiSecret = c.req.header('x-api-secret')
-    const expectedSecret = c.env.API_SECRET
-    
-    if (expectedSecret && apiSecret !== expectedSecret) {
-        console.warn('API secret mismatch or missing for upload/complete')
-        return c.json({ error: 'Unauthorized' }, 401)
-    }
-
+    const userId = getAuthUserId(c)
     if (!userId) {
-        return c.json({ error: 'User ID required' }, 400)
+        return c.json({ error: 'Unauthorized' }, 401)
     }
 
     try {
